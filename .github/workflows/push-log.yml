@@ -1,0 +1,22 @@
+name: Log on Push
+
+# Push 이벤트에 트리거
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 push할 때 트리거됨 (필요에 따라 변경)
+
+jobs:
+  log-push:
+    runs-on: ubuntu-latest  # 작업이 실행될 환경
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # 코드를 체크아웃하는 액션
+
+      - name: Log push event
+        run: |
+          echo "Push event detected!"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Committer: ${{ github.actor }}"
+          echo "Commit Message: ${{ github.event.head_commit.message }}"
